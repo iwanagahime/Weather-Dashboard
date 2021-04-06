@@ -10,6 +10,12 @@
       integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
       crossorigin="anonymous"
     />
+    <link
+    rel="stylesheet"
+    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+    crossorigin="anonymous"
+  />
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
@@ -17,10 +23,32 @@
   <body>
     <div>
       <nav class="navbar navbar-dark bg-dark">
-        <!-- Navbar content -->
+        <header>
+          <h1>Weather Dashboard</h1>
+        </header>
       </nav>
+    </div class="container" id="search-sectioin">
+    <div class="row">
+      <div class="col-sm-4 col-md-3 col-lg-4">
+        Search for a City
+        <div class="input-group mb-3">
+          <input type="text" class="form-control" id="search-for-a-city-input">
+          <button type="button" class="btn btn-primary" id="button-addon2"><i class="fas fa-search"></i></button>
+        </div>
+        <ul class="list-group">
+  <li class="list-group-item">An item</li>
+  <li class="list-group-item">A second item</li>
+  <li class="list-group-item">A third item</li>
+  <li class="list-group-item">A fourth item</li>
+  <li class="list-group-item">And a fifth one</li>
+</ul>
+      </div>
+      <div class="col-sm-8 col-md-7 col-lg-8">
+        .col-sm-6 .col-md-5 .col-lg-6
+      </div>
+      
+      </div>
     </div>
-    <div></div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="./assets/main.js"></script>
   </body>
