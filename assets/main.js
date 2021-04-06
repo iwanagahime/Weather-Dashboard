@@ -1,3 +1,8 @@
+const formElement = document.getElementById("search-for-a-city-form");
+console.log(formElement);
+const button = document.getElementById("button-addon2");
+console.log(button);
+
 const renderCities = (citiesFromLocalStorage) => {
   // For each city construct a list item and append to the list group
 };
