@@ -27,17 +27,27 @@ const getDataByCityName = async (event) => {
   if (target.is("li")) {
     const cityName = target.data("city");
 
-    const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
+    const currentDayUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
 
-    const data = await fetchData(url);
+    const currentDayResponse = await fetchData(currentDayUrl);
 
-    const currentDayData = transformData(data);
+    const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentDayResponse.coord.lat}&lon=${currentDayResponse.coord.lon}&exclude=minutely,hourly&appid=${API_KEY}`;
+
+    const forecastResponse = await fetchData(forecastUrl);
+
+    const cardsData = forecastResponse.daily.map(transformForecastData);
+
+    $("#forecast-cards-container").empty();
+
+    cardsData.slice(1, 6).forEach(renderForecastCard);
+
+    const currentDayData = transformCurrentDayData(currentDayResponse);
 
     renderCurrentDayCard(currentDayData);
   }
 };
 
-const transformData = (data) => {
+const transformCurrentDayData = (data) => {
   return {
     cityName: data.name,
     temperature: data.main.temp,
@@ -48,6 +58,14 @@ const transformData = (data) => {
   };
 };
 
+const transformForecastData = (data) => {
+  return {
+    date: moment.unix(data.dt).format("MM/DD/YYYY"),
+    iconURL: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+    temperature: data.temp.day,
+    humidity: data.humidity,
+  };
+};
 const onSubmit = async (event) => {
   event.preventDefault();
 
@@ -62,11 +80,21 @@ const onSubmit = async (event) => {
 
   $("#city-input").val("");
 
-  const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
+  const currentDayUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
 
-  const data = await fetchData(url);
+  const currentDayResponse = await fetchData(currentDayUrl);
 
-  const currentDayData = transformData(data);
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentDayResponse.coord.lat}&lon=${currentDayResponse.coord.lon}&exclude=minutely,hourly&appid=${API_KEY}`;
+
+  const forecastResponse = await fetchData(forecastUrl);
+
+  const cardsData = forecastResponse.daily.map(transformForecastData);
+
+  $("#forecast-cards-container").empty();
+
+  cardsData.slice(1, 6).forEach(renderForecastCard);
+
+  const currentDayData = transformCurrentDayData(currentDayResponse);
 
   renderCurrentDayCard(currentDayData);
 };
@@ -112,6 +140,22 @@ const renderCurrentDayCard = (data) => {
   $("#current-day-card").append(card);
 };
 
+const renderForecastCard = (data) => {
+  const card = `<div
+  class="card mh=100 bg-primary text-light rounded card-block"
+>
+  <h5 class="card-title p-1">${data.date}</h5>
+  <img src="${data.iconURL}" />
+
+  <h6 class="card-subtitle mb-2 text-light p-md-2">
+    Temperature: ${data.temperature} &deg F
+  </h6>
+  <h6 class="card-subtitle mb-2 text-light p-md-2">
+    Humidity:${data.humidity} %
+  </h6>
+</div>`;
+  $("#forecast-cards-container").append(card);
+};
 const onReady = () => {
   renderCitiesFromLocalStorage();
 };
