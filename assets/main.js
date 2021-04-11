@@ -18,9 +18,12 @@ const onSubmit = (event) => {
   cities.push(cityName);
   console.log(cities);
   localStorage.setItem("cities", JSON.stringify(cities));
+  renderCitiesFromLocalStorage();
+  $("#city-input").val(""),
 };
 
 const renderCitiesFromLocalStorage = () => {
+  $("#searched-cities").empty();
   const cities = getFromLocalStorage();
   const ul = $("<ul>").addClass("list-group");
   const appendListItemToUl = (city) => {
