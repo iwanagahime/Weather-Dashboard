@@ -27,34 +27,20 @@ const getDataByCityName = async (event) => {
   if (target.is("li")) {
     const cityName = target.data("city");
 
-    const currentDayUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
-
-    const currentDayResponse = await fetchData(currentDayUrl);
-
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentDayResponse.coord.lat}&lon=${currentDayResponse.coord.lon}&exclude=minutely,hourly&appid=${API_KEY}`;
-
-    const forecastResponse = await fetchData(forecastUrl);
-
-    const cardsData = forecastResponse.daily.map(transformForecastData);
-
-    $("#forecast-cards-container").empty();
-
-    cardsData.slice(1, 6).forEach(renderForecastCard);
-
-    const currentDayData = transformCurrentDayData(currentDayResponse);
-
-    renderCurrentDayCard(currentDayData);
+    renderAllCards(cityName);
   }
 };
 
-const transformCurrentDayData = (data) => {
+const transformCurrentDayData = (data, name) => {
+  const current = data.current;
   return {
-    cityName: data.name,
-    temperature: data.main.temp,
-    humidity: data.main.humidity,
-    windSpeed: data.wind.speed,
+    cityName: name,
+    temperature: current.temp,
+    humidity: current.humidity,
+    windSpeed: current.wind_speed,
     date: moment.unix(data.dt).format("MM/DD/YYYY"),
-    iconURL: `http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`,
+    iconURL: `http://openweathermap.org/img/wn/${current.weather[0].icon}@2x.png`,
+    uvi: current.uvi,
   };
 };
 
@@ -80,11 +66,15 @@ const onSubmit = async (event) => {
 
   $("#city-input").val("");
 
+  renderAllCards(cityName);
+};
+
+const renderAllCards = async (cityName) => {
   const currentDayUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
 
   const currentDayResponse = await fetchData(currentDayUrl);
 
-  const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentDayResponse.coord.lat}&lon=${currentDayResponse.coord.lon}&exclude=minutely,hourly&appid=${API_KEY}`;
+  const forecastUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${currentDayResponse.coord.lat}&lon=${currentDayResponse.coord.lon}&exclude=minutely,hourly&units=imperial&appid=${API_KEY}`;
 
   const forecastResponse = await fetchData(forecastUrl);
 
@@ -94,7 +84,10 @@ const onSubmit = async (event) => {
 
   cardsData.slice(1, 6).forEach(renderForecastCard);
 
-  const currentDayData = transformCurrentDayData(currentDayResponse);
+  const currentDayData = transformCurrentDayData(
+    forecastResponse,
+    currentDayResponse.name
+  );
 
   renderCurrentDayCard(currentDayData);
 };
@@ -133,7 +126,7 @@ const renderCurrentDayCard = (data) => {
     <div class="py-2">Temperature: ${data.temperature} &deg; F</div>
     <div class="py-2">Humidity: ${data.humidity}%</div>
     <div class="py-2">Wind Speed: ${data.windSpeed} MPH</div>
-    <div class="py-2">UV Index 45</div>
+    <div class="py-2">UV Index ${data.uvi}</div>
   </div>
 </div>`;
 
