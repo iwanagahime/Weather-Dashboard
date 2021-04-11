@@ -115,6 +115,14 @@ const renderCitiesFromLocalStorage = () => {
   $("#searched-cities").append(ul);
 };
 
+const getUvIndexClass = (uvIndex) => {
+  if (uvIndex > 8) {
+    return "p-2 btn-danger";
+  } else if (uvIndex > 3) {
+    return "p-2 btn-warning";
+  } else return "p-2 btn-success";
+};
+
 const renderCurrentDayCard = (data) => {
   $("#current-day-card").empty();
 
@@ -126,7 +134,9 @@ const renderCurrentDayCard = (data) => {
     <div class="py-2">Temperature: ${data.temperature} &deg; F</div>
     <div class="py-2">Humidity: ${data.humidity}%</div>
     <div class="py-2">Wind Speed: ${data.windSpeed} MPH</div>
-    <div class="py-2">UV Index ${data.uvi}</div>
+    <div class="py-2">UV Index <span class="${getUvIndexClass(data.uvi)}>${
+    data.uvi
+  }</span> </div>
   </div>
 </div>`;
 
