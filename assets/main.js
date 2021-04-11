@@ -22,11 +22,15 @@ const fetchData = async (url) => {
   }
 };
 
-const getDataByCityName = (event) => {
+const getDataByCityName = async (event) => {
   const target = $(event.target);
   if (target.is("li")) {
     const cityName = target.data("city");
-    fetchData(cityName);
+
+    const url = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${API_KEY}`;
+
+    const data = await fetchData(url);
+    console.log(data);
   }
 };
 
