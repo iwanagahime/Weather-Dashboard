@@ -11,149 +11,209 @@
       crossorigin="anonymous"
     />
     <link
-    rel="stylesheet"
-    href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
-    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
-    crossorigin="anonymous"
-  />
-    <link rel="stylesheet" href="./assets/css/style.css" />
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+      integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
     <title>Weather Dashboard</title>
   </head>
 
   <body>
-    
-      <nav class="navbar navbar-dark bg-dark ">
-        <div class="mx-auto">
-          <h1  >Weather Dashboard</h1>
+    <header>
+      <nav class="navbar navbar-dark bg-dark">
+        <div class="mx-auto p-3">
+          <h1>Weather Dashboard</h1>
         </div>
       </nav>
+    </header>
 
+    <main class="container-fluid">
+      <div class="row p-2 vh-100">
+        <div class="col-sm-12 col-md-3 bg-light">
+          <div>
+            <h4 class="p-md-2">Search for a City:</h4>
+            <form
+              class="row row-cols-lg-auto g-3 align-items-center"
+              id="search-by-city-form"
+            >
+              <div class="col-12">
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="city-input"
+                    placeholder="Enter a city name"
+                  />
+                </div>
+              </div>
 
-    </div class= "d-flex" id="content" >
-    <div class="row">
-      <div class="col-sm-3 col-md-2 col-lg-3  mh-100 bg-light text-dark h-100" id="search-section">
-        <h4 class="p-md-2">Search for a City</h4>
-        <div class="input-group mb-3 p-md-2 w-50" id="city-search-form">
-          <input type="text" class="form-control" id="city-input">
-          <button type="button" class="btn btn-primary" id="button-addon2" id="search-button"><i class="fas fa-search"></i></button>
-        </div>
-        <ul class="list-group p-md-2 w-75" id="city-list">
-           <li class="list-group-item"id="city-name">An item</li>
-           <li class="list-group-item"id="city-name">A second item</li>
-           <li class="list-group-item"id="city-name">A third item</li>
-           <li class="list-group-item"id="city-name">A fourth item</li>
-           <li class="list-group-item"id="city-name">And a fifth one</li>
-           <li class="list-group-item"id="city-name">And a sixth one</li>
-           <li class="list-group-item"id="city-name">And a seventh one</li>
-           <li class="list-group-item"id="city-name">And an eighth one</li>
-        </ul>
-      </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary">
+                  <i class="fas fa-search"></i>
+                </button>
+              </div>
+            </form>
+          </div>
 
-
-      <div class="col-sm-8 col-md-8 col-lg-9 p-5 " id ="weather-conditions-container">
-       <div class="card card w-100" style="width: 18rem;" id="current-weather-card">
-         <div class="card-body">
-            <h2 class="card-title">City 4/07/2021 <span><i>icon</i></span></h2>
-            <div class="card-text p-md-2">Temperature: value F</div>
-            <div class="card-text p-md-2">Humidity: value %</div>
-            <div class="card-text p-md-2">Wind Speed: value MPH</div>
-            <div class="card-text p-md-2">UV Index:<span class="bg-danger p-1">value</span> </div>
+          <div class="m-4" id="searched-cities">
+            <ul class="list-group p-md-2 w-75" id="city-list">
+              <li class="list-group-item" id="city-name">An item</li>
+              <li class="list-group-item" id="city-name">A second item</li>
+              <li class="list-group-item" id="city-name">A third item</li>
+              <li class="list-group-item" id="city-name">A fourth item</li>
+              <li class="list-group-item" id="city-name">And a fifth one</li>
+              <li class="list-group-item" id="city-name">And a sixth one</li>
+              <li class="list-group-item" id="city-name">And a seventh one</li>
+              <li class="list-group-item" id="city-name">And an eighth one</li>
+            </ul>
           </div>
         </div>
-        
-            
-          
-   
-        
 
-
-        <div  class="h-50 " id="forecast-container">
-          <h2 class="p-md-3">5-Day Forecast:</h2>
-          <!-- <div class="d-flex flex-wrap justify-content-md-around align-items-stretch "  id="forecast-cards-container"> -->
-            <div class="row hidden-md-up d-flex flex-wrap justify-content-md-around align-items-stretch" id="forecast-cards-container">
-               
-                
-                <div class="col-md-2 jobs_index_middle_panels mr-3"> 
-                  <div class="card mh=100 bg-primary text-light rounded card-block "  id="forecast-card">
-                     <h5 class="card-title p-1">4/09/2021</h5><span class="p-md-2"><i>icon</i></span>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Temperature:value F</h6>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Humidity:value %</h6>
-                  </div>
-                </div>
-                <!-- <div class="mt-3"></div>  -->
-
-                <div class="col-md-2 jobs_index_middle_panels mr-3"> 
-                  <div class="card mh=100 bg-primary text-light rounded card-block "  id="forecast-card">
-                     <h5 class="card-title p-1">4/09/2021</h5><span class="p-md-2"><i>icon</i></span>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Temperature:value F</h6>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Humidity:value %</h6>
-                  </div>
-                </div>
-  
-                
-                <!-- <div class="mt-3"></div>  -->
-
-                <div class="col-md-2 jobs_index_middle_panels mr-3"> 
-                  <div class="card mh=100 bg-primary text-light rounded card-block "  id="forecast-card">
-                     <h5 class="card-title p-1">4/09/2021</h5><span class="p-md-2"><i>icon</i></span>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Temperature:value F</h6>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Humidity:value %</h6>
-                  </div>
-                </div>
-  
-                
-
-                <!-- <div class="mt-3"></div>  -->
-  
-                <div class="col-md-2 jobs_index_middle_panels mr-3"> 
-                  <div class="card mh=100 bg-primary text-light rounded card-block "  id="forecast-card">
-                     <h5 class="card-title p-1">4/09/2021</h5><span class="p-md-2"><i>icon</i></span>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Temperature:value F</h6>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Humidity:value %</h6>
-                  </div>
-                </div>
-
-                <!-- <div class="mt-3"></div>  -->
-  
-                <div class="col-md-2 jobs_index_middle_panels mr-3"> 
-                  <div class="card mh=100 bg-primary text-light rounded card-block "  id="forecast-card">
-                     <h5 class="card-title p-1">4/09/2021</h5><span class="p-md-2"><i>icon</i></span>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Temperature:value F</h6>
-                     <h6 class="card-subtitle mb-2 text-light p-md-2 ">Humidity:value %</h6>
-                  </div>
-                </div>
-      
-
-
-              
-             
-
-              
-
-             
+        <div
+          class="col-sm-8 col-md-8 col-lg-9 p-5"
+          id="weather-conditions-container"
+        >
+          <div
+            class="card card w-100"
+            style="width: 18rem"
+            id="current-weather-card"
+          >
+            <div class="card-body">
+              <h2 class="card-title">
+                City 4/07/2021 <span><i>icon</i></span>
+              </h2>
+              <div class="card-text p-md-2">Temperature: value F</div>
+              <div class="card-text p-md-2">Humidity: value %</div>
+              <div class="card-text p-md-2">Wind Speed: value MPH</div>
+              <div class="card-text p-md-2">
+                UV Index:<span class="bg-danger p-1">value</span>
+              </div>
             </div>
-
           </div>
-        
-          
-              
-            
 
-           
-              
+          <div class="h-50" id="forecast-container">
+            <h2 class="p-md-3">5-Day Forecast:</h2>
+            <!-- <div class="d-flex flex-wrap justify-content-md-around align-items-stretch "  id="forecast-cards-container"> -->
+            <div
+              class="row hidden-md-up d-flex flex-wrap justify-content-md-around align-items-stretch"
+              id="forecast-cards-container"
+            >
+              <div class="col-md-2 jobs_index_middle_panels mr-3">
+                <div
+                  class="card mh=100 bg-primary text-light rounded card-block"
+                  id="forecast-card"
+                >
+                  <h5 class="card-title p-1">4/09/2021</h5>
+                  <span class="p-md-2"><i>icon</i></span>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Temperature:value F
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Humidity:value %
+                  </h6>
+                </div>
+              </div>
+              <!-- <div class="mt-3"></div>  -->
 
-           
-            
-           
-                 
-          
+              <div class="col-md-2 jobs_index_middle_panels mr-3">
+                <div
+                  class="card mh=100 bg-primary text-light rounded card-block"
+                  id="forecast-card"
+                >
+                  <h5 class="card-title p-1">4/09/2021</h5>
+                  <span class="p-md-2"><i>icon</i></span>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Temperature:value F
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Humidity:value %
+                  </h6>
+                </div>
+              </div>
+
+              <!-- <div class="mt-3"></div>  -->
+
+              <div class="col-md-2 jobs_index_middle_panels mr-3">
+                <div
+                  class="card mh=100 bg-primary text-light rounded card-block"
+                  id="forecast-card"
+                >
+                  <h5 class="card-title p-1">4/09/2021</h5>
+                  <span class="p-md-2"><i>icon</i></span>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Temperature:value F
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Humidity:value %
+                  </h6>
+                </div>
+              </div>
+
+              <!-- <div class="mt-3"></div>  -->
+
+              <div class="col-md-2 jobs_index_middle_panels mr-3">
+                <div
+                  class="card mh=100 bg-primary text-light rounded card-block"
+                  id="forecast-card"
+                >
+                  <h5 class="card-title p-1">4/09/2021</h5>
+                  <span class="p-md-2"><i>icon</i></span>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Temperature:value F
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Humidity:value %
+                  </h6>
+                </div>
+              </div>
+
+              <!-- <div class="mt-3"></div>  -->
+
+              <div class="col-md-2 jobs_index_middle_panels mr-3">
+                <div
+                  class="card mh=100 bg-primary text-light rounded card-block"
+                  id="forecast-card"
+                >
+                  <h5 class="card-title p-1">4/09/2021</h5>
+                  <span class="p-md-2"><i>icon</i></span>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Temperature:value F
+                  </h6>
+                  <h6 class="card-subtitle mb-2 text-light p-md-2">
+                    Humidity:value %
+                  </h6>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      
-    </div>
-  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+    </main>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+      integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+      integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc"
+      crossorigin="anonymous"
+    ></script>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"
+      integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ=="
+      crossorigin="anonymous"
+    ></script>
+
     <script src="./assets/main.js"></script>
   </body>
 </html>
