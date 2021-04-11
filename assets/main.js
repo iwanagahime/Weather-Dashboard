@@ -1,5 +1,6 @@
 const API_KEY = "90496a8a768bcd7563d02c4a1d063af1";
 
+// function to get data from local storage
 const getFromLocalStorage = () => {
   const localStorageData = JSON.parse(localStorage.getItem("cities"));
 
@@ -10,6 +11,7 @@ const getFromLocalStorage = () => {
   }
 };
 
+// async function to get data from open weather api
 const fetchData = async (url) => {
   try {
     const responseFromApi = await fetch(url);
@@ -31,6 +33,7 @@ const getDataByCityName = async (event) => {
   }
 };
 
+// functions to transform data ready for rendering cards
 const transformCurrentDayData = (data, name) => {
   const current = data.current;
   return {
@@ -52,6 +55,8 @@ const transformForecastData = (data) => {
     humidity: data.humidity,
   };
 };
+
+// function on submit of the form
 const onSubmit = async (event) => {
   event.preventDefault();
 
@@ -69,6 +74,7 @@ const onSubmit = async (event) => {
   renderAllCards(cityName);
 };
 
+// function to render all cards
 const renderAllCards = async (cityName) => {
   const currentDayUrl = `http://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${API_KEY}`;
 
@@ -115,14 +121,16 @@ const renderCitiesFromLocalStorage = () => {
   $("#searched-cities").append(ul);
 };
 
+// function setting uv index color code on current day card
 const getUvIndexClass = (uvIndex) => {
   if (uvIndex > 8) {
     return "p-2 btn-danger";
-  } else if (uvIndex > 3) {
-    return "p-2 btn-warning";
-  } else return "p-2 btn-success";
+  } else if (uvIndex < 3) {
+    return "p-2 btn-success";
+  } else return "p-2 btn-warning";
 };
 
+// functions to construct cards
 const renderCurrentDayCard = (data) => {
   $("#current-day-card").empty();
 
@@ -134,7 +142,7 @@ const renderCurrentDayCard = (data) => {
     <div class="py-2">Temperature: ${data.temperature} &deg; F</div>
     <div class="py-2">Humidity: ${data.humidity}%</div>
     <div class="py-2">Wind Speed: ${data.windSpeed} MPH</div>
-    <div class="py-2">UV Index <span class="${getUvIndexClass(data.uvi)}>${
+    <div class="py-2">UV Index: <span class="${getUvIndexClass(data.uvi)}">${
     data.uvi
   }</span> </div>
   </div>
@@ -159,6 +167,7 @@ const renderForecastCard = (data) => {
 </div>`;
   $("#forecast-cards-container").append(card);
 };
+
 const onReady = () => {
   renderCitiesFromLocalStorage();
 };
