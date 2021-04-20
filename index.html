@@ -31,6 +31,7 @@
 
     <!-- main body containing search section and weather cards -->
     <main class="container-fluid">
+      <!-- search section containing search form -->
       <div class="row p-2 vh-100">
         <div class="col-sm-12 col-md-3 bg-light">
           <div>
@@ -57,17 +58,19 @@
               </div>
             </form>
           </div>
-
+          <!-- searched cities list -->
           <div class="m-4" id="searched-cities"></div>
         </div>
 
         <div class="col-sm-8 col-md-8 col-lg-9 p-3">
+          <!-- current day weather card -->
           <div class="row">
             <div class="col-12" id="current-day-card"></div>
           </div>
 
           <div class="row">
             <div class="col-12">
+              <!-- forecast cards -->
               <h2 class="p-md-3">5-Day Forecast:</h2>
               <div
                 class="d-flex flex-wrap justify-content-around align-items-strech"
