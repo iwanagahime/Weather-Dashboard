@@ -48,8 +48,3 @@ code .
 ![Deployed application ](src="./../assets/images/screenshot-3.png)
 
 ![Deployed application ](src="assets/images/screenshot-4.PNG)
-
-###
-
-![Deployed application ]()
-![Deployed application ]()
